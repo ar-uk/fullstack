@@ -32,7 +32,6 @@ public class Cardatabase implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // Add owner objects and save these to db
         Owner owner1 = new Owner("John" , "Johnson");
         Owner owner2 = new Owner("Mary" , "Robinson");
         orepository.saveAll(Arrays.asList(owner1, owner2));
@@ -42,10 +41,24 @@ public class Cardatabase implements CommandLineRunner {
                 "SSJ-3002", 2020, 29000, owner2));
         repository.save(new Car("Toyota", "Prius", "Silver",
                 "KKO-0212", 2022, 39000, owner2));
-        // Fetch all cars and log to console
-        for (Car car : repository.findAll())
-        {
+        for (Car car : repository.findAll()) {
+        }
+
+        Car car1 = repository.findById(1).orElse(null);
+        if (car1 != null){
+            car1.setPrice(61000);
+            car1.setColor("Black");
+            repository.save(car1);
+            logger.info("edited " + car1);
+        }
+
+        Car car2 = repository.findById(2).orElse(null);
+        if (car2 != null){
+            repository.delete(car2);
+            logger.info("Deleted " + car2);
         }
     }
+
+
 
     }
