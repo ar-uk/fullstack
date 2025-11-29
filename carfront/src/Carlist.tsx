@@ -5,7 +5,6 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080
 
 export default function CarCRUD() {
   const [cars, setCars] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [editRow, setEditRow] = useState(null);
   const [newCar, setNewCar] = useState({
     brand: '', model: '', color: '', registrationNumber: '', modelYear: '', price: ''
@@ -28,8 +27,6 @@ export default function CarCRUD() {
     } catch (err) {
       console.error('Error fetching cars:', err);
       alert('Failed to fetch cars: ' + err.message);
-    } finally {
-      setLoading(false);
     }
   };
 
